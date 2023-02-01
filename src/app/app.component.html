@@ -1,0 +1,77 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style lang="scss">
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .pass_control {
+    display: block;
+  }
+  .standart {
+    width: 100%;
+    height: 2px;
+    background-color: grey;
+    background-size: 33.3%;
+  }
+  .inputBox {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(50vw, 1fr);
+    grid-template-rows: minmax(100px, 1fr);
+  }
+  .strong {
+    background-color: green;
+    width: 100%;
+  }
+  .average {
+    background-color: yellow;
+    width: calc(100% / 3 * 2);
+  }
+  .easy {
+    background-color: red;
+    width: calc(100% / 3);
+  }
+</style>
+
+<!-- Toolbar -->
+<form [formGroup]="form">
+  <h1>Cheking your password</h1>
+  <p *ngIf="pass.errors?.['minlength']" style="color: red">
+    Minimum symbols {{ pass.errors!["minlength"]?.['requiredLength'] | json }}
+  </p>
+  <p
+    *ngIf="pass.errors?.['pattern'] && !pass.errors?.['minlength']"
+    style="color: red"
+  >
+    Your password must be specific [letter,number,specsymbol]
+  </p>
+  <div class="inputBox">
+    <input type="password" id="pass" name="pass" formControlName="pass" />
+    <div class="standart" style="position: absolute; bottom: 0; z-index: 0">
+      <p
+        [style.width]="pass.value.length < 8 ? '100%' : ''"
+        style="z-index: 1; height: 2px"
+        [class]="validation()"
+      ></p>
+    </div>
+  </div>
+</form>
