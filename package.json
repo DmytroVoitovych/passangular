@@ -1,6 +1,7 @@
 {
   "name": "passanangular",
   "version": "0.0.0",
+  "homepage": "https://dmytrovoitovych.github.io/passangular/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
